@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selisih Waktu</title>
+</head>
+<body>
+    <h2>Hitung Selisih Waktu</h2>
+    <label for="lastRequestBlockedAt">last_request_blocked_at (ISO format):</label>
+    <input type="text" id="lastRequestBlockedAt" value="2024-10-01T02:18:31.068025"><br><br>
+
+    <label for="epochTimeBlocked">epoch_time_blocked (detik):</label>
+    <input type="number" id="epochTimeBlocked" value="1727749116"><br><br>
+
+    <button onclick="hitungSelisih()">Hitung Selisih Waktu</button>
+
+    <h3>Hasil:</h3>
+    <p id="hasil">-</p>
+
+    <script>
+        function hitungSelisih() {
+            // Ambil nilai input
+            const lastRequestBlockedAt = document.getElementById("lastRequestBlockedAt").value;
+            const epochTimeBlocked = parseInt(document.getElementById("epochTimeBlocked").value);
+
+            // Ubah last_request_blocked_at ke dalam epoch (detik)
+            const dateLastRequestBlockedAt = new Date(lastRequestBlockedAt).getTime() / 1000;
+
+            // Hitung selisih dalam detik
+            const selisihDetik = dateLastRequestBlockedAt - epochTimeBlocked;
+
+            // Konversi ke menit dan detik
+            const selisihMenit = Math.floor(selisihDetik / 60);
+            const sisaDetik = Math.floor(selisihDetik % 60);
+
+            // Tampilkan hasil
+            document.getElementById("hasil").innerHTML = `Selisih waktu: ${selisihMenit} menit ${sisaDetik} detik`;
+        }
+    </script>
+</body>
+</html>
